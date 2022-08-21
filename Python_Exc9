@@ -1,0 +1,78 @@
+#########################################
+# Question 1 - do not delete this comment
+#########################################
+def top_of_genre(in_file_name, out_file_name, genre):
+    max_revenue = 0
+    top = ''
+    f_in = open(in_file_name)
+    header = f_in.readline()
+    for line in f_in:
+        fields = line.rstrip().split(',')
+        if genre in fields[2] and float(fields[10]) > max_revenue:
+            max_revenue = float(fields[10])
+            top = line
+    f_in.close()
+    f_out = open(out_file_name, 'w')
+    f_out.write(header+top)
+    f_out.close()
+
+
+#top_of_genre("IMDB.csv", "output.csv", "action")
+
+#########################################
+# Question 2 - do not delete this comment
+#########################################
+def is_sorted(l):
+    if len(l)>1:
+        for i in range(len(l)-1):
+            if l[i]>l[i+1]:
+                return False
+    return True
+    
+
+
+#########################################
+# Question 3 - do not delete this comment
+#########################################
+def get_key_by_value(d, val):
+    for key in d:
+        if d[key]==val:
+            return key
+    return None
+
+
+#########################################
+# Question 4 - do not delete this comment
+#########################################
+def get_top3_students(students_and_grades):
+    return [item[0] for item in sorted(students_and_grades, key=grade, reverse=True)[:3]]
+    # how efficient is that? is it possible to improve it?
+
+def grade(student_grade):
+    return student_grade[1]
+
+
+
+#############################################
+# BONUS Question - do not delete this comment
+#############################################
+def merge_3_sorted_lists(l1, l2, l3):
+    l4 = merge(l1, l2)
+    return merge(l3, l4)  # Why can we do that?
+
+def merge(left, right):
+    merged = []
+    left_i = 0  # p
+    right_i = 0  # q
+    while left_i < len(left) and right_i < len(right):
+        if left[left_i] <= right[right_i]:
+            merged.append(left[left_i])
+            left_i += 1
+        else:
+            merged.append(right[right_i])
+            right_i += 1
+    # copy remaining:
+    merged += left[left_i:] + right[right_i:]
+    return merged
+
+
